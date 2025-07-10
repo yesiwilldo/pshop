@@ -1,0 +1,529 @@
+{
+	"info": {
+		"_postman_id": "54579e6b-4dd9-4cb0-a339-11a764d263c9",
+		"name": "华测商城测试",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45696163"
+	},
+	"item": [
+		{
+			"name": "登录",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody)\r",
+							"//获取响应体中的token值\r",
+							"//把字符串格式数据转换为对象形式\r",
+							"var result=JSON.parse(responseBody)\r",
+							"// console.log(result.data.token)\r",
+							"//把token设置为全局变量\r",
+							"pm.globals.set(\"token\", result.data.token);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"accounts\": \"qqqqqqq\",\r\n \"pwd\": \"123456\",\r\n \"type\": \"username\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}/index.php?s=api/user/login&application=app&application_client_type=weixin",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "s",
+							"value": "api/user/login"
+						},
+						{
+							"key": "application",
+							"value": "app"
+						},
+						{
+							"key": "application_client_type",
+							"value": "weixin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "地区",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var times = Date.now();\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.globals.set(\"times\", times);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}/index.php?s=api/region/index&application=app&application_client_type=weixin&token={{token}}&pid=3",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "s",
+							"value": "api/region/index"
+						},
+						{
+							"key": "application",
+							"value": "app"
+						},
+						{
+							"key": "application_client_type",
+							"value": "weixin"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "pid",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "我的积分列表",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"page\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}/index.php?s=api/userintegral/index&application=app&application_client_type=weixin&token={{token}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "s",
+							"value": "api/userintegral/index"
+						},
+						{
+							"key": "application",
+							"value": "app"
+						},
+						{
+							"key": "application_client_type",
+							"value": "weixin"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "首页列表",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"page\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}/index.php?s=api/index/index&application=app&application_client_type=weixin",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "s",
+							"value": "api/index/index"
+						},
+						{
+							"key": "application",
+							"value": "app"
+						},
+						{
+							"key": "application_client_type",
+							"value": "weixin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "我的消息列表",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"page\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}/index.php?s=api/message/index&application=app&application_client_type=weixin&token={{token}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "s",
+							"value": "api/message/index"
+						},
+						{
+							"key": "application",
+							"value": "app"
+						},
+						{
+							"key": "application_client_type",
+							"value": "weixin"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "订单确认",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"goods_id\": \"2\",\r\n \"spec\": [\r\n {\r\n \"type\": \"套餐\",\r\n \"value\": \"套餐⼆\"\r\n },\r\n {\r\n \"type\": \"颜⾊\",\r\n \"value\": \"银⾊\"\r\n },\r\n {\r\n \"type\": \"容量\",\r\n \"value\": \"64G\"\r\n }\r\n ],\r\n \"stock\": 2\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}/index.php?s=api/cart/save&application=app&application_client_type=weixin&token={{token}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "s",
+							"value": "api/cart/save"
+						},
+						{
+							"key": "application",
+							"value": "app"
+						},
+						{
+							"key": "application_client_type",
+							"value": "weixin"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "订单列表",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"id\": \"12\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}/index.php?s=api/goods/favor&application=app&application_client_type=weixin&token={{token}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "s",
+							"value": "api/goods/favor"
+						},
+						{
+							"key": "application",
+							"value": "app"
+						},
+						{
+							"key": "application_client_type",
+							"value": "weixin"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "订单详情",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"goods_id\": \"12\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}/index.php?s=api/goods/detail&application=app&application_client_type=weixin",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "s",
+							"value": "api/goods/detail"
+						},
+						{
+							"key": "application",
+							"value": "app"
+						},
+						{
+							"key": "application_client_type",
+							"value": "weixin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "商品收藏列表",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}/index.php?s=api/usergoodsfavor/index&application=app&application_client_type=weixin&token={{token}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"path": [
+						"",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "s",
+							"value": "api/usergoodsfavor/index"
+						},
+						{
+							"key": "application",
+							"value": "app"
+						},
+						{
+							"key": "application_client_type",
+							"value": "weixin"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
